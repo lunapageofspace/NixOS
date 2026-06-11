@@ -3,5 +3,6 @@
         winetricks
         wineWowPackages.stable
         wineWowPackages.waylandFull
+        eden.packages.${pkgs.system}.eden
     ];
 }

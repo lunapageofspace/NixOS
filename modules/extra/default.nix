@@ -5,6 +5,7 @@ let
   yubikey = builtins.hasAttr "yubikey" extra && extra.yubikey;
   tools = builtins.hasAttr "tools" extra && extra.tools;
   bluetooth = builtins.hasAttr "bluetooth" extra && extra.bluetooth;
+  llmlab = builtins.hasAttr "llmlab" extra && extra.llmlab;
 in
 {
   imports = [  ] ++
@@ -12,5 +13,6 @@ in
     (if (wine) then [ ./wine.nix ] else [  ]) ++
     (if (yubikey) then [ ./yubikey.nix ] else [  ]) ++
     (if (tools) then [ ./extra-tools.nix ] else [  ]) ++
-    (if (bluetooth) then [ ./bluetooth.nix ] else [  ]);
+    (if (bluetooth) then [ ./bluetooth.nix ] else [  ]) ++
+    (if (llmlab) then [ ./llmlab.nix ] else [  ]);
 }

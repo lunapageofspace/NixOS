@@ -35,8 +35,8 @@ in {
         ignoreDups = true;
         share = true;
     };
-    programs.zsh.initExtra = lib.concatMapStrings builtins.readFile [
-        ../../../../config/zshrc
+    programs.zsh.initContent = lib.concatMapStrings builtins.readFile [
+        ../../../../dotfiles/zshrc
     ];
     programs.zsh.plugins = [
         {

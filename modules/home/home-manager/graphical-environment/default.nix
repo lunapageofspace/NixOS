@@ -7,10 +7,11 @@ let
 in
 {
     imports = [ 
+      ./dconf.nix
       ./packages-minimal.nix
     ] ++
       (if (gnome) then [ ./gnome.nix ] else [  ]) ++
       (if (plasma) then [ ./plasma.nix ] else [  ]) ++
-      (if (hyperland) then [ ./hyperland.nix ] else [  ]) ++
+      (if (hyperland) then [ ./hyprland.nix ] else [  ]) ++
       (if (thickpkgs) then [ ./packages-thick.nix ] else [  ]);
 }

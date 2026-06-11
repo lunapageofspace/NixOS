@@ -28,13 +28,19 @@
         localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
     };
 
+    programs.nix-ld.enable = true;
+
     services.ivpn.enable = true;
 
     environment.systemPackages = with pkgs; [
-      steamtinkerlaunch
-      protonup-qt
       ivpn
+      icu
+      zulu17 # Java Runtime 17 ( Starsector )
+      gamemode
+      gamescope
+      protonup-qt
       r2modman-upstream
+      steamtinkerlaunch
       (lutris.override {
         extraLibraries =  pkgs: [
           # List library dependencies here
@@ -43,6 +49,15 @@
           # List package dependencies here
         ];
       })
+      # overrides the NixOS package, starsector, see: https://wiki.nixos.org/wiki/Starsector
+      (pkgs.starsector.overrideAttrs ({ ... }: {
+        #postInstall = ''
+        #  cp ${dotfiles/starsector/settings.json} $out/share/starsector/data/config/settings.json
+        #  substituteInPlace $out/share/starsector/.starsector.sh-wrapped \
+        #    --replace-fail "Xms1536m" "Xms8192m" \
+        #    --replace-fail "Xmx1536m" "Xmx8192m"
+        #'';
+      }))
     ];
 
     programs.winbox = {
@@ -52,7 +67,8 @@
     };
 
     networking.firewall = {
-      allowedTCPPorts = [ 80 443 ];
+      allowedTCPPorts = [ 80 443 42420 ];
+      allowedUDPPorts = [ 42420 ];
       allowedUDPPortRanges = [
         {
           from = 40000;

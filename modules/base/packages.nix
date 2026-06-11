@@ -50,8 +50,12 @@
     s3fs
     sshfs
 
-    pinentry
+    pinentry-curses
     openssl
+
+    zellij
+    minicom
+    python3
   ];
 
   environment.variables.EDITOR = "nvim";

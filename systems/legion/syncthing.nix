@@ -11,24 +11,29 @@
       devices = {
         "Kubernetes" = { 
           introducer = true;
+          id = "M4SBMZB-2H75JTK-YCPAVF4-NE6KJQT-TWCTLTQ-SXKO4YG-VHFUWEU-ZV55DQH";
           addresses = [
             "quic://172.21.0.2:22000"
             "dynamic"
           ];
         };
+        "Pixel 6" = {
+          introducer = false;
+          addresses = ["dynamic"];
+        };
       };
       folders = {
         "Documents" = {
           path = "/home/elliana/Documents";
-          devices = [ "Kubernetes" ];
+          devices = [ "Kubernetes" "Pixel 6" ];
         };
         "Code" = {
           path = "/home/elliana/Code";
-          devices = [ "Kubernetes" ];
+          devices = [ "Kubernetes" "Pixel 6" ];
         };
         "Sync" = {
           path = "/home/elliana/Sync";
-          devices = [ "Kubernetes" ];
+          devices = [ "Kubernetes" "Pixel 6" ];
         };
       };
     };

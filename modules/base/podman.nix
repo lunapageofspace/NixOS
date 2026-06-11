@@ -11,5 +11,6 @@
     podman-tui
     podman-compose
     docker-compose
+    distrobox
   ];
 }

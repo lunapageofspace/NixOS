@@ -6,13 +6,13 @@
     diceware
     ent
     git
-    gitAndTools.git-extras
+    git-extras
     gnupg
     gpg-scripts
     paperkey
     parted
     pcsclite
-    pcsctools
+    pcsc-tools
     pgpdump
     pinentry-curses
     pwgen
@@ -31,6 +31,9 @@
   services.udev.packages = [
     pkgs.yubikey-personalization
   ];
+  environment.etc."pkcs11/modules/opensc".text = ''
+    module: ${pkgs.opensc}/lib/opensc-pkcs11.so
+  '';
   environment.etc."ssl/openssl.cnf".text = ''
     openssl_conf = openssl_init
     [openssl_init]

@@ -54,4 +54,54 @@
         device = "/dev/disk/by-uuid/ee6215f2-f525-411a-b6bf-86d73ec82c4c";
         fsType = "btrfs";
     };
+
+    fileSystems."/home/elliana/.nfs/xenia.zynthovian.xyz" = {
+        device = "xenia.zynthovian.xyz:/srv/media/";
+        fsType = "nfs";
+        options = [
+            "noauto"
+            "_netdev"
+            "retry=0"
+            "timeo=10"
+            "retrans=3"
+            "nfsvers=4.2"
+            "x-systemd.automount"
+        ];
+    };
+
+    fileSystems."/home/elliana/Downloads" = {
+        device = "/home/elliana/.nfs/xenia.zynthovian.xyz/Downloads";
+        depends = ["/home/elliana/.nfs/xenia.zynthovian.xyz"];
+        options = ["noauto" "_netdev" "bind" "rw" "x-systemd.automount"];
+        fsType = "none";
+    };
+
+    fileSystems."/home/elliana/Music" = {
+        device = "/home/elliana/.nfs/xenia.zynthovian.xyz/Music";
+        depends = ["/home/elliana/.nfs/xenia.zynthovian.xyz"];
+        options = ["noauto" "_netdev" "bind" "rw" "x-systemd.automount"];
+        fsType = "none";
+    };
+
+    fileSystems."/home/elliana/Pictures" = {
+        device = "/home/elliana/.nfs/xenia.zynthovian.xyz/Pictures";
+        depends = ["/home/elliana/.nfs/xenia.zynthovian.xyz"];
+        options = ["noauto" "_netdev" "bind" "rw" "x-systemd.automount"];
+        fsType = "none";
+    };
+
+    fileSystems."/home/elliana/Videos" = {
+        device = "/home/elliana/.nfs/xenia.zynthovian.xyz/Videos";
+        depends = ["/home/elliana/.nfs/xenia.zynthovian.xyz"];
+        options = ["noauto" "_netdev" "bind" "rw" "x-systemd.automount"];
+        fsType = "none";
+    };
+
+    fileSystems."/home/elliana/Documents" = {
+        device = "/home/elliana/.nfs/xenia.zynthovian.xyz/Documents";
+        depends = ["/home/elliana/.nfs/xenia.zynthovian.xyz"];
+        options = ["noauto" "_netdev" "bind" "rw" "x-systemd.automount"];
+        fsType = "none";
+    };
+
 }

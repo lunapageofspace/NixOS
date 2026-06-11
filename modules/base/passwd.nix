@@ -34,5 +34,11 @@ in {
       user.username
     ];
     shell = pkgs.zsh;
+    subGidRanges = [
+      { count = 65535; startGid = 100000; }
+    ];
+    subUidRanges = [
+      { count = 65535; startUid = 100000; }
+    ];
   };
 }

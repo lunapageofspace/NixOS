@@ -9,7 +9,6 @@
                 packages = [
                     "com.github.tchx84.Flatseal"
                     "dev.k8slens.OpenLens"
-                    "dev.vencord.Vesktop"
                     "com.discordapp.Discord"
                     "org.inkscape.Inkscape"
                     "org.kde.krita"
@@ -34,9 +33,17 @@
             services.flatpak = {
                 packages = [ "com.vivaldi.Vivaldi" ];
                 overrides."com.vivaldi.Vivaldi".Context = {
-                    sockets = [ "!wayland" "!fallback-x11" "x11" "gpg-agent" "pcsc" ];
+                    sockets = [ "wayland" "!fallback-x11" "x11" "gpg-agent" "pcsc" ];
                 };
             };
+        }
+        {
+            services.mpd.enable = true;
+            home.packages = with pkgs; [
+                vesktop
+                cantata
+                rmpc
+            ];
         }
         #{ # Flatpak: VSCode
         #    services.flatpak = {
@@ -63,45 +70,43 @@
         {
             programs.vscode = {
                 enable = true;
-                enableUpdateCheck = false; # It is annoying
-                userSettings = {
-                    "dotfiles.repository" = "https://github.com/TkPegatron/dotfiles.git";
-                    "dotfiles.installCommand" = "install.sh";
-                    "editor.renderWhitespace" = "all";
-                    "editor.fontFamily" = "'CaskaydiaCove Nerd Font Mono','Droid Sans Mono', 'monospace', monospace";
-                    "editor.fontLigatures" = true;
-                    "workbench.colorTheme" = "Catppuccin Mocha";
-                    "workbench.iconTheme" = "catppuccin-mocha";
-                    "git.confirmSync" = false;
-                    "terminal.integrated.enableMultiLinePasteWarning" = false;
+                profiles.default = {
+                    enableUpdateCheck = false; # It is annoying
+                    userSettings = {
+                        "dotfiles.repository" = "https://github.com/TkPegatron/dotfiles.git";
+                        "dotfiles.installCommand" = "install.sh";
+                        "editor.renderWhitespace" = "all";
+                        "editor.fontFamily" = "'CaskaydiaCove Nerd Font Mono','Droid Sans Mono', 'monospace', monospace";
+                        "editor.fontLigatures" = true;
+                        "workbench.colorTheme" = "Catppuccin Mocha";
+                        "workbench.iconTheme" = "catppuccin-mocha";
+                        "git.confirmSync" = false;
+                        "terminal.integrated.enableMultiLinePasteWarning" = false;
+                    };
+                    extensions = with pkgs.vscode-extensions; [
+                        bbenoist.nix
+                        aaron-bond.better-comments
+                        oderwat.indent-rainbow
+                        catppuccin.catppuccin-vsc
+                        catppuccin.catppuccin-vsc-icons
+                        davidanson.vscode-markdownlint
+                        bierner.markdown-checkbox
+                        bierner.markdown-emoji
+                        # Need to ovveride the version for at least remote-containers
+                        #ms-vscode-remote.remote-ssh
+                        #ms-vscode-remote.remote-containers
+                    ];
                 };
-                extensions = with pkgs.vscode-extensions; [
-                    bbenoist.nix
-                    aaron-bond.better-comments
-                    oderwat.indent-rainbow
-                    catppuccin.catppuccin-vsc
-                    catppuccin.catppuccin-vsc-icons
-                    davidanson.vscode-markdownlint
-                    bierner.markdown-checkbox
-                    bierner.markdown-emoji
-                    # Need to ovveride the version for at least remote-containers
-                    #ms-vscode-remote.remote-ssh
-                    #ms-vscode-remote.remote-containers
-                ];
             };
         }
-        { # Misc Apps, these could be switched out for flatpaks
-
+        { # Install the Zed Editor
+            home.packages = with pkgs; [
+                zed-editor
+            ];
+        }
+        { # Install libvirt frontend
             home.packages = with pkgs; [
                 virt-manager
-                #flameshot
-                #discord
-                #openlens
-                #krita
-                #gimp
-                #inkscape
-                #meld
-                #wireshark
             ];
         }
         #{ # Web Browser: Vivaldi
@@ -117,6 +122,12 @@
         #    programs.vscode.package = with pkgs; pkgs.vscode;
         #    home.sessionVariables.NIXOS_OZONE_WL = "1";
         #}
+        {
+            home.packages = with pkgs; [
+                zam-plugins
+                calf
+            ];
+        }
         {
             dconf.settings = {
                 "org/virt-manager/virt-manager/connections" = {

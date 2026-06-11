@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  # Setup GVFS for dolphin
+  services.gvfs.enable = true;
   # Configure NixOS to start GDM
   services.xserver.enable = true;
   services.desktopManager.plasma6.enable = true;

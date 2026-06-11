@@ -27,7 +27,6 @@
 
     services.ivpn.enable = true;
     environment.systemPackages = with pkgs; [
-        ivpn
         libraspberrypi
         raspberrypi-eeprom
     ];
