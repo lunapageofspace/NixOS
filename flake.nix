@@ -28,6 +28,34 @@
       version = "24.05";
     in
     {
+      homeConfigurations = {
+        elliana-shell = {
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            user = { username = "root"; fullname = "Elliana Perry"; };
+            desktop = { graphical = false; };
+          };
+          modules = [
+            ./modules/home/home-manager/env.nix
+            ./modules/home/home-manager/xdg.nix
+            ./modules/home/home-manager/shell-environment
+            ./modules/home/home-manager/users/elliana/git.nix
+            ./modules/home/home-manager/users/elliana/gpg.nix
+            {
+              home.username = "root";
+              home.homeDirectory = "/root";
+              home.stateVersion = "24.05";
+              programs.home-manager.enable = true;
+              # Without this, home-manager's own man-db collides with man-db
+              # pulled in transitively (bat-extras/ranger) — "conflict... bin/accessdb".
+              manual.manpages.enable = false;
+            }
+          ];
+        };
+      };
       nixosConfigurations = {
         #
         # Hardware Installations
