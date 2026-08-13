@@ -52,6 +52,7 @@
               # Without this, home-manager's own man-db collides with man-db
               # pulled in transitively (bat-extras/ranger) — "conflict... bin/accessdb".
               manual.manpages.enable = false;
+              programs.man.enable = false;
             }
           ];
         };
