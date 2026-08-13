@@ -36,7 +36,7 @@ in {
         share = true;
     };
     programs.zsh.initContent = lib.concatMapStrings builtins.readFile [
-        ../../../../dotfiles/zshrc
+        ../../../../config/zshrc
     ];
     programs.zsh.plugins = [
         {

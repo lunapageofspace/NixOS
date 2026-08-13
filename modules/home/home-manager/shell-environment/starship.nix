@@ -8,8 +8,8 @@ in {
             xdg.configFile = {
                 "starship.toml".text = (
                     if (graphical)
-                    then builtins.readFile ../../../../dotfiles/.config/starship/nf-singleline.toml
-                    else builtins.readFile ../../../../dotfiles/.config/starship/bf-singleline.toml
+                    then builtins.readFile ../../../../config/starship/nf-singleline.toml
+                    else builtins.readFile ../../../../config/starship/bf-singleline.toml
                 );
             };
         }
