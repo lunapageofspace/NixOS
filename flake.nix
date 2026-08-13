@@ -22,7 +22,7 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixos-hardware, eden, ... }:
+  outputs = inputs@{ self, nixpkgs, nixpkgs-unstable, nixos-hardware, eden, home-manager, ... }:
     let
       nixosSystem = import ./lib/nixosConfig.nix;
       version = "24.05";
