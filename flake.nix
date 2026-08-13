@@ -28,7 +28,7 @@
       version = "24.05";
     in
     {
-      homeConfigurations = {
+      homeConfigurations = home-manager.lib.homeManagerConfiguration {
         elliana-shell = {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
