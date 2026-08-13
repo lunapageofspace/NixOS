@@ -28,8 +28,8 @@
       version = "24.05";
     in
     {
-      homeConfigurations = home-manager.lib.homeManagerConfiguration {
-        elliana-shell = {
+      homeConfigurations = {
+        elliana-shell = home-manager.lib.homeManagerConfiguration {
           pkgs = import nixpkgs {
             system = "x86_64-linux";
             config.allowUnfree = true;
